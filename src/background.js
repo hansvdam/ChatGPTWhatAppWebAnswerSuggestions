@@ -6,18 +6,7 @@ importScripts('createGptUtterance.js');
 // For more information on background script,
 // See https://developer.chrome.com/extensions/background_pages
 
-// Reload whatsapp tab when extension is installed/updated
-chrome.runtime.onInstalled.addListener(async () => {
-    chrome.tabs.query({}, function (tabs) {
-        for (var i = 0; i < tabs.length; i++) {
-            if ("https://web.whatsapp.com/" === tabs[i].url) {
-                chrome.tabs.reload(tabs[i].id);
-            }
-        }
-    });
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request) => {
     if (request.action === 'openOptionsPage') {
         chrome.runtime.openOptionsPage();
     }

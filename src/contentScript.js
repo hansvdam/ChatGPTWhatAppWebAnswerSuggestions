@@ -17,7 +17,7 @@ console.log(
     `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
 );
 
-var link = document.createElement('link');
+const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = chrome.runtime.getURL('content.css');
@@ -38,7 +38,7 @@ function readData() {
       sendHistory = result.sendHistory;
     })
   } catch (e) {
-    // sometimes this happens when resetting the extension, its just annoying to see this error in the console, so we catch it
+    // sometimes this happens when resetting the extension, it's just annoying to see this error in the console, so we catch it
   }
 }
 
@@ -71,9 +71,9 @@ function createPrompt(lastIsMine, chatHistoryShort) {
   let promptPrefix;
   let promptInstructions = 'Me: ';
   if (lastIsMine) {
-    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoij and the style of Me and do not repeat the contents of the last utterance:\n\n';
+    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoji and the style of Me and do not repeat the contents of the last utterance:\n\n';
   } else {
-    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoij and the style of Me:\n\n';
+    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoji and the style of Me:\n\n';
   }
   let prompt = promptPrefix + chatHistoryShort + "\n\n" + promptInstructions;
   console.log("prompt:", prompt)
@@ -82,8 +82,7 @@ function createPrompt(lastIsMine, chatHistoryShort) {
 
 let globalGptButtonObject;
 
-function gptButtonClicked(gptButton) {
-  // console.log("gptButton clicked:", gptButton)
+function gptButtonClicked() {
   chrome.storage.local.get({
     askedForPermission: false,
   }, (result) => {
@@ -167,7 +166,7 @@ function processMainNodeAdded(addedNode) {
   const gptButton = gptButtonObject.gptButton;
   console.log("gptButton:", gptButton)
   gptButton.addEventListener('click', () => {
-    gptButtonClicked(gptButton);
+    gptButtonClicked();
 
   });
 }
@@ -209,9 +208,9 @@ async function writeTextToSuggestionField(response) {
   }
 }
 
-chrome.runtime.onMessage.addListener((request, sender) => {
+chrome.runtime.onMessage.addListener((request) => {
   if (request.message === "gptResponse") {
-    var response = request.response;
+    const response = request.response;
     globalGptButtonObject.setBusy(false);
     if (response.error !== null && response.error !== undefined) {
       writeTextToSuggestionField(response.error.message);

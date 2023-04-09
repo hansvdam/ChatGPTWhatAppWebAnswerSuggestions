@@ -1,10 +1,10 @@
 function confirmDialog(message) {
     if (confirmVisible) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(false)
         });
     }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         confirmVisible = true;
         // Create the dialog box element
         let confirmDialog = document.createElement("div");

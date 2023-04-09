@@ -46,7 +46,7 @@ function saveOptions(e) {
         apiChoice: apiChoice,
         // copyChatSuggestion: copyChatSuggestion,
     }, () => {
-        var alertBox = document.querySelector('.toast');
+        const alertBox = document.querySelector('.toast');
         alertBox.style.display = 'block';
         setTimeout(function () {
             // hide the alert after 5 seconds

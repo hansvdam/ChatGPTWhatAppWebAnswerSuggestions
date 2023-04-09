@@ -71,7 +71,7 @@ function createAndAddOptionsButton(newButtonContainer) {
   optionsButton.addEventListener('click', () => {
     try {
       chrome.runtime.sendMessage({action: 'openOptionsPage'});
-    } catch (e) {// ignore, sometimes happens when reloadiing the extension, but don't want to see it pop up in the console
+    } catch (e) {// ignore, sometimes happens when reloading the extension, but don't want to see it pop up in the console
     }
   });
   newButtonContainer.appendChild(optionsButton);
@@ -97,7 +97,7 @@ function createGptFooter(footer, mainNode) {
   let mainFooterContainerDiv = newFooter.childNodes[0].childNodes[0].childNodes[1].childNodes[0];
   const gptButtonObject = createGptButton();
 
-  // copies the button contaier with the smily etc and use that as the container for the new buttons at the end:
+  // copies the button container with the smiley etc. and use that as the container for the new buttons at the end:
   const buttonContainer = mainFooterContainerDiv.childNodes[0];
   buttonContainer.removeChild(buttonContainer.firstChild)
   buttonContainer.removeChild(buttonContainer.firstChild)
