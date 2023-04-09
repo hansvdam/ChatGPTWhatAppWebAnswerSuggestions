@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="options.css">
+    <title>ChatGPT Options</title>
+</head>
+<body>
+<h1>Options for GPT answer-suggestions</h1>
+<div id="chatHistoryWarningAlert" class="custom-alert">
+    <div class="alert-content">
+        <div>
+            <p>The last messages of you chat-conversation will be sent to openai automatically, each time you
+                select another user, <br> or when a message comes into the currently
+                selected conversation.<br>
+                They are kept and used by openai according to
+                their <a href="https://openai.com/policies/api-data-usage-policies"
+                         target="_blank">api-documentation</a> and <a href="https://openai.com/policies/privacy-policy"
+                                                                      target="_blank">privicy policy</a>.<br> This is
+                less secure than the end-to-end encryption that <a
+                        href="https://faq.whatsapp.com/820124435853543/?helpref=uf_share"
+                        target="_blank">whatsapp(tm) uses</a>.<br></p>
+        </div>
+        <div style="text-align: center;">
+            <p><strong><span style="color: red;">Beware to leave this off in sensitive conversations!</span></strong>
+            </p>
+            <button type="submit" id="hideHistoryWarningAlert">I understand</button>
+        </div>
+    </div>
+</div>
+<form id="options-form">
+    <fieldset>
+        <legend>Trigger chat answers from GPT:</legend>
+        <input type="radio" id="send-history-auto" name="send-history" value="auto">
+        <label for="send-history-auto">Automatically</label><br>
+        <input type="radio" id="send-history-manual" name="send-history"
+               value="manual">
+        <label for="send-history-manual">Manually (Button)</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Choose API:</legend>
+        <div style="display: flex; flex-direction: column;">
+            <div>
+                <input type="radio" id="webapp-api" name="api-choice" value="webapp"
+                       required>
+                <label for="webapp-api">Web App API</label>
+            </div>
+            <div>
+                <input type="radio" id="openai-api" name="api-choice" value="openai">
+                <label for="openai-api">OpenAI API</label>
+                <div id="api-key-container" style="display: none; margin-left: 20px;">
+                    <label for="api-key">API Key:</label>
+                    <div class="input-with-link">
+                        <input type="password" id="api-key" name="api-key">
+                        <a href="https://platform.openai.com/account/api-keys"
+                           target="_blank" id="api-key-link">Get it here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit">Save</button>
+    <div class="toast" style="display:none">
+        <p>Options saved successfully!</p>
+    </div>
+</form>
+<script src="options.js"></script>
+</body>
+</html>

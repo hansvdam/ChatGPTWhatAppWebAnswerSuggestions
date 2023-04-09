@@ -1,0 +1,145 @@
+/* options.css */
+
+/* General styling */
+
+{
+    box-sizing: border-box
+;
+    margin: 0
+;
+    padding: 0
+;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+legend {
+    padding: 0 5px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+input[type="radio"] + label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.input-with-link {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.input-with-link input[type="password"] {
+    margin-bottom: 0;
+}
+
+.input-with-link a {
+    margin-left: 10px;
+    min-width: 80px;
+    white-space: nowrap;
+    align-self: center;
+}
+
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    /*justify-content: center;*/
+    visibility: hidden;
+    padding-top: 20%;
+}
+
+.custom-alert .alert-content {
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    /*text-align: center;*/
+}
+
+.toast {
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 400px;
+}
+
+.toast-message {
+    font-size: 18px;
+    text-align: center;
+}
+
+
