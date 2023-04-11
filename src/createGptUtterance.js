@@ -147,6 +147,7 @@ async function postConversation(sessionToken, prompt, handleResponseOrError) {
     ],
     model: 'text-davinci-002-render-sha',
     parent_message_id: generateUUIDv4(),
+    is_visible: false
   }
 
   const chatResponse = await fetch('https://chat.openai.com/backend-api/conversation', {

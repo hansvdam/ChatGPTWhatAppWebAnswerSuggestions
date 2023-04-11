@@ -1,8 +1,31 @@
+const encoder = new TextEncoder();
+
+class LinkedSet {
+    constructor() {
+        this.set = new Set();
+        this.array = [];
+    }
+
+    add(value) {
+        if (!this.set.has(value)) {
+            this.set.add(value);
+            this.array.push(value);
+        }
+    }
+
+    getPosition(value) {
+        return this.array.indexOf(value);
+    }
+}
+
 function parseHtml(main) {
     const main2 = main;
     const chatHistory = [];
     // console.log(main2)
-    const msgContainers = main2.querySelectorAll("div[data-testid='msg-container']");
+    let msgContainers = main2.querySelectorAll("div[data-testid='msg-container']");
+
+    const linkedSet = new LinkedSet();
+    msgContainers = Array.from(msgContainers).slice(-10);
     msgContainers.forEach((el) => {
         let messageStringCollector = '';
         const elements = el.querySelectorAll('.copyable-text');
@@ -10,9 +33,12 @@ function parseHtml(main) {
             const messageLabel = el.getAttribute('data-pre-plain-text');
             if (messageLabel !== null) { // get the prefix (person)
                 if (el.closest('.message-out') !== null) {
-                    messageStringCollector += "Me: ";
+                    messageStringCollector += "me: ";
                 } else {
-                    messageStringCollector += "Contact: ";
+                    let contactName = messageLabel.replace(/\[.*?\]\s*/, "").slice(0, -2)
+                    linkedSet.add(contactName)
+                    const contactNumber = linkedSet.getPosition(contactName) + 1
+                    messageStringCollector += contactNumber + ": ";
                 }
             } else { // get the message itself
                 const messageContent = getTextWithEmojis(el);
@@ -26,14 +52,13 @@ function parseHtml(main) {
         }
     });
     // console.log('count', chatHistory.length)
-    const chatHistoryShort = chatHistory.slice(-8);
     // if last expression is mine
-    const lastExpression = chatHistoryShort[chatHistoryShort.length - 1];
+    const lastExpression = chatHistory[chatHistory.length - 1];
     let lastIsMine = false;
-    if (lastExpression.includes("Me:")) {
+    if (lastExpression.includes("me:")) {
         lastIsMine = true
     }
-    const chatHistoryShortAsString = chatHistoryShort.join('\n\n')
+    const chatHistoryShortAsString = chatHistory.join('\n\n')
     // console.log(chatHistoryShortAsString);
     return {chatHistoryShort: chatHistoryShortAsString, lastIsMine: lastIsMine}
 }

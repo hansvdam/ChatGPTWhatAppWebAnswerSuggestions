@@ -69,11 +69,11 @@ let newFooterParagraph;
 
 function createPrompt(lastIsMine, chatHistoryShort) {
   let promptPrefix;
-  let promptInstructions = 'Me: ';
+  let promptInstructions = 'me: ';
   if (lastIsMine) {
-    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoji and the style of Me and do not repeat the contents of the last utterance:\n\n';
+    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoji and the style of me and do not repeat the contents of the last utterance:\n\n';
   } else {
-    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoji and the style of Me:\n\n';
+    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoji and the style of me:\n\n';
   }
   let prompt = promptPrefix + chatHistoryShort + "\n\n" + promptInstructions;
   console.log("prompt:", prompt)
@@ -88,7 +88,7 @@ function gptButtonClicked() {
   }, (result) => {
     if (!result.askedForPermission) {
       let message = "<ul>" +
-          "<li>The last 8 messages of your chat-conversation will be sent to openai, each time you press this button.</li>" +
+          "<li>The last 10 messages of your chat-conversation will be sent to openai, each time you press this button.</li>" +
           "<li>They are handled by openai according to their <a href='https://openai.com/policies/api-data-usage-policies' target='_blank'>api-documentation</a> and <a href='https://openai.com/policies/privacy-policy' target='_blank'>privacy policy</a>.</li>" +
           "<li>This is less secure than the end-to-end encryption that <a href='https://faq.whatsapp.com/820124435853543/?helpref=uf_share' target='_blank'>WhatsApp(tm) uses</a>.</li>" +
           "</ul><br><br>" +
