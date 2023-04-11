@@ -4,14 +4,9 @@ Welcome to the **WhatsApp Web Answer Suggestions from ChatGPT** Chrome extension
 to make your WhatsApp Web experience more productive and efficient by providing you with AI-generated answer suggestions
 powered by OpenAI's ChatGPT.
 
-## Table of Contents
+## Chrome web store location:
 
-1. [Features](#features)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Privacy and Security](#privacy-and-security)
-5. [Contribute](#contribute)
-6. [License](#license)
+https://chrome.google.com/webstore/detail/chatgpt-answers-for-whats/bmbidjjfpkmlddlbkljbphdgpnjnpogk
 
 ## Features
 
