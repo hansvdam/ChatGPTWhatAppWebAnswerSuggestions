@@ -33,11 +33,13 @@ function parseHtml(main) {
             const messageLabel = el.getAttribute('data-pre-plain-text');
             if (messageLabel !== null) { // get the prefix (person)
                 if (el.closest('.message-out') !== null) {
-                    messageStringCollector += "me: ";
+                    messageStringCollector += "Me: ";
                 } else {
+                    // contactName should be obfuscated into a number, but repetitive utterances by the same user should carry the same label:
                     let contactName = messageLabel.replace(/\[.*?\]\s*/, "").slice(0, -2)
                     linkedSet.add(contactName)
                     const contactNumber = linkedSet.getPosition(contactName) + 1
+                    // Using only the number turned out to be the only way to coerce GPT to no refer to these substitute label's It's a pity we cannot use the real names, but that would make it too privacy-sensitive, especially since you expose what other people said too.
                     messageStringCollector += contactNumber + ": ";
                 }
             } else { // get the message itself
@@ -55,7 +57,7 @@ function parseHtml(main) {
     // if last expression is mine
     const lastExpression = chatHistory[chatHistory.length - 1];
     let lastIsMine = false;
-    if (lastExpression.includes("me:")) {
+    if (lastExpression.includes("Me:")) {
         lastIsMine = true
     }
     const chatHistoryShortAsString = chatHistory.join('\n\n')

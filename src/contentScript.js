@@ -69,11 +69,11 @@ let newFooterParagraph;
 
 function createPrompt(lastIsMine, chatHistoryShort) {
   let promptPrefix;
-  let promptInstructions = 'me: ';
+  let promptInstructions = 'Me: ';
   if (lastIsMine) {
-    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoji and the style of me and do not repeat the contents of the last utterance:\n\n';
+    promptPrefix = 'As me, give a double texting utterance completing the following chat conversation flow. Use Emoji and my writing style and do not repeat the contents of the last utterance:\n\n';
   } else {
-    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoji and the style of me:\n\n';
+    promptPrefix = 'As me, give an utterance completing the following chat conversation flow. Use Emoji and my writing style:\n\n';
   }
   let prompt = promptPrefix + chatHistoryShort + "\n\n" + promptInstructions;
   console.log("prompt:", prompt)
