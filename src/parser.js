@@ -22,7 +22,7 @@ function parseHtml(main) {
     const main2 = main;
     const chatHistory = [];
     // console.log(main2)
-    let msgContainers = main2.querySelectorAll("div[data-testid='msg-container']");
+    let msgContainers = main2.querySelectorAll('div[role="row"] .message-out, div[role="row"] .message-in');
 
     const linkedSet = new LinkedSet();
     msgContainers = Array.from(msgContainers).slice(-10);

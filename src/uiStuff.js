@@ -94,13 +94,14 @@ function createGptFooter(footer, mainNode) {
   const newFooter = footer.cloneNode(true);
 
   // div containing 2 childdivs: the buttons-div (containing another div for each button) and the textfield-div (which also contains a div for the speechbutton)
-  let mainFooterContainerDiv = newFooter.childNodes[0].childNodes[0].childNodes[1].childNodes[0];
+  let mainFooterContainerDiv = newFooter.childNodes[0].childNodes[0].childNodes[0].childNodes[0];
   const gptButtonObject = createGptButton();
 
   // copies the button container with the smiley etc. and use that as the container for the new buttons at the end:
   const buttonContainer = mainFooterContainerDiv.childNodes[0];
-  buttonContainer.removeChild(buttonContainer.firstChild)
-  buttonContainer.removeChild(buttonContainer.firstChild)
+  const textfieldContainer = mainFooterContainerDiv.childNodes[1];
+  buttonContainer.removeChild(buttonContainer.firstChild) // remove plus button
+  textfieldContainer.firstChild.removeChild(textfieldContainer.firstChild.firstChild) // remove emoji button
   const newButtonContainer = buttonContainer.cloneNode()
   mainFooterContainerDiv.appendChild(newButtonContainer)
   // mainFooterContainerDiv.removeChild(mainFooterContainerDiv.firstChild)
@@ -113,7 +114,7 @@ function createGptFooter(footer, mainNode) {
   });
 
 
-  const speechbutton = newFooter.querySelectorAll('.svlsagor[data-testid="ptt-ready-btn"]')[0];
+  const speechbutton = newFooter.querySelectorAll('button[aria-label="Voice message"]')[0];
   const speechButtonParent = speechbutton.parentNode
 
   speechButtonParent.remove()
