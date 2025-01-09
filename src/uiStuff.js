@@ -99,8 +99,9 @@ function createGptFooter(footer, mainNode) {
 
   // copies the button container with the smiley etc. and use that as the container for the new buttons at the end:
   const buttonContainer = mainFooterContainerDiv.childNodes[0];
-  buttonContainer.removeChild(buttonContainer.firstChild)
-  // buttonContainer.removeChild(buttonContainer.firstChild)
+  const textfieldContainer = mainFooterContainerDiv.childNodes[1];
+  buttonContainer.removeChild(buttonContainer.firstChild) // remove plus button
+  textfieldContainer.firstChild.removeChild(textfieldContainer.firstChild.firstChild) // remove emoji button
   const newButtonContainer = buttonContainer.cloneNode()
   mainFooterContainerDiv.appendChild(newButtonContainer)
   // mainFooterContainerDiv.removeChild(mainFooterContainerDiv.firstChild)
