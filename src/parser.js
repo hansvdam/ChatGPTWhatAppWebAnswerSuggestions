@@ -22,7 +22,9 @@ function parseHtml(main) {
     const main2 = main;
     const chatHistory = [];
     // console.log(main2)
-    let msgContainers = main2.querySelectorAll("div[data-testid='msg-container']");
+    // Get both outgoing and incoming messages
+    let msgContainers = main2.querySelectorAll(".message-out, .message-in");
+    // let msgContainers = main2.querySelectorAll("div[data-testid='msg-container']");
 
     const linkedSet = new LinkedSet();
     msgContainers = Array.from(msgContainers).slice(-10);
