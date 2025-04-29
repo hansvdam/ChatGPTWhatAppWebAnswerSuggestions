@@ -25,12 +25,14 @@ function saveOptions(e) {
     e.preventDefault();
     const apiKey = document.getElementById('api-key').value;
     const sendHistory = document.querySelector('input[name="send-history"]:checked').value;
+    console.log('Saving options with sendHistory:', sendHistory);
 
     chrome.storage.local.set({
         apiKey: apiKey,
         sendHistory: sendHistory,
         apiChoice: 'openai'
     }, () => {
+        console.log('Options saved successfully');
         const alertBox = document.querySelector('.toast');
         alertBox.style.display = 'block';
         setTimeout(function () {
