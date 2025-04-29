@@ -10,7 +10,7 @@
     "128": "icons/icon_128.png"
   },
   "host_permissions": [
-    "https://*.openai.com/"
+    "https://api.openai.com/"
   ],
   "background": {
     "service_worker": "background.js"

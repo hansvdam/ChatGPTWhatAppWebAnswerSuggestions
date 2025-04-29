@@ -43,17 +43,12 @@
         <legend>Choose API:</legend>
         <div style="display: flex; flex-direction: column;">
             <div>
-                <input type="radio" id="webapp-api" name="api-choice" value="webapp"
-                       required>
-                <label for="webapp-api">Web App API</label>
-            </div>
-            <div>
-                <input type="radio" id="openai-api" name="api-choice" value="openai">
+                <input type="radio" id="openai-api" name="api-choice" value="openai" checked>
                 <label for="openai-api">OpenAI API</label>
-                <div id="api-key-container" style="display: none; margin-left: 20px;">
+                <div id="api-key-container" style="margin-left: 20px;">
                     <label for="api-key">API Key:</label>
                     <div class="input-with-link">
-                        <input type="password" id="api-key" name="api-key">
+                        <input type="password" id="api-key" name="api-key" required>
                         <a href="https://platform.openai.com/account/api-keys"
                            target="_blank" id="api-key-link">Get it here</a>
                     </div>
