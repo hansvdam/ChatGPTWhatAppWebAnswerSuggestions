@@ -130,8 +130,8 @@ function createGptFooter(footer, mainNode) {
 
   // scrolling to bottom, but after the insertion of the new footer has been processed:
   setTimeout(() => {
-    const div = mainNode.querySelectorAll('[data-testid="conversation-panel-messages"]');
-    div[0].scrollTop = div[0].scrollHeight;
+    const div2 = mainNode.querySelectorAll('[role="application"]');
+    div2[0].scrollTop = div2[0].scrollHeight;
   }, 0);
 
   // disable editing in the new footer
