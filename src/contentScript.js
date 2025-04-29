@@ -17,11 +17,11 @@ console.log(
     `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
 );
 
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = chrome.runtime.getURL('content.css');
-document.head.appendChild(link);
+// const link = document.createElement('link');
+// link.rel = 'stylesheet';
+// link.type = 'text/css';
+// link.href = chrome.runtime.getURL('content.css');
+// document.head.appendChild(link);
 
 // let apiKey;
 let sendHistory = false;
