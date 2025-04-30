@@ -69,9 +69,8 @@ function triggerEvent() {
 let globalMainNode;
 let newFooterParagraph;
 
-function createPrompt(lastIsMine, chatHistoryShort) {
+async function createPrompt(lastIsMine, chatHistoryShort) {
     let promptCenter;
-    let tone_of_voice = 'Use Emoji and my own writing style.';
     let mePrefix = 'Me: ';
     let promptPrefix1 = "You are an excellent chat-turn completer for Whatsapp. Your own turns in the provided chat-history are prefixed by 'Me: ', the turns of others by '<integer>: '. In a one-on-one coversation the other's turn is prefixed by '1: '.";
     if (lastIsMine) {
@@ -79,6 +78,14 @@ function createPrompt(lastIsMine, chatHistoryShort) {
     } else {
         promptCenter = 'As "Me", give an utterance completing the following chat conversation flow.';
     }
+
+    const result = await new Promise((resolve) => {
+        chrome.storage.local.get({
+            toneOfVoice: 'Use Emoji and my own writing style. Be concise.'
+        }, resolve);
+    });
+
+    const tone_of_voice = result.toneOfVoice;
     let prompt = promptPrefix1 + ' ' + promptCenter + ' ' + tone_of_voice + '\n\n' + "chat history:\n" + chatHistoryShort + "\n\n" + mePrefix;
     console.log("prompt:", prompt)
     return prompt;
@@ -157,7 +164,7 @@ function processMainNodeAdded(addedNode) {
     parseHtmlFunction = async function () {
         const {chatHistoryShort, lastIsMine} = parseHtml(addedNode)
         // console.log("chatInput:", chatHistoryShort)
-        let prompt = createPrompt(lastIsMine, chatHistoryShort);
+        let prompt = await createPrompt(lastIsMine, chatHistoryShort);
         gptButtonObject.setBusy(true)
         await chrome.runtime.sendMessage({
             message: "sendChatToGpt",
