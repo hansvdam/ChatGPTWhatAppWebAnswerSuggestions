@@ -166,6 +166,7 @@ function processMainNodeAdded(addedNode) {
         // console.log("chatInput:", chatHistoryShort)
         let prompt = await createPrompt(lastIsMine, chatHistoryShort);
         gptButtonObject.setBusy(true)
+        writeTextToSuggestionField('', true); // Show loading spinner
         await chrome.runtime.sendMessage({
             message: "sendChatToGpt",
             prompt: prompt,
@@ -211,9 +212,26 @@ observer.observe(document.body, {
     subtree: true // Watch for changes in the descendants of the node
 });
 
-async function writeTextToSuggestionField(response) {
+async function writeTextToSuggestionField(response, isLoading = false) {
     try {
-        newFooterParagraph.innerHTML = response
+        if (isLoading) {
+            newFooterParagraph.innerHTML = `
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <style>
+                        .spinner {
+                            transform-origin: center;
+                            animation: spin 0.6s linear infinite;
+                        }
+                        @keyframes spin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                    </style>
+                    <circle class="spinner" cx="12" cy="12" r="10" stroke="#54656F" stroke-width="3" fill="none" stroke-dasharray="15, 85" stroke-dashoffset="0"/>
+                </svg>`;
+        } else {
+            newFooterParagraph.innerHTML = response;
+        }
     } catch (e) {
         console.error(e);
     }

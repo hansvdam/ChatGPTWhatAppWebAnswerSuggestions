@@ -43,8 +43,31 @@
     pointer-events: auto;
 }
 
+.selectable-text.copyable-text {
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @keyframes spin {
-    to {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
         transform: rotate(360deg);
     }
+}
+
+.selectable-text.copyable-text .spinner {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #54656F;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin: 8px auto;
+    position: relative;
+    transform-origin: center;
 }
