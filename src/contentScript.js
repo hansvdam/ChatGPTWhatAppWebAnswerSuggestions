@@ -215,8 +215,11 @@ observer.observe(document.body, {
 async function writeTextToSuggestionField(response, isLoading = false) {
     try {
         if (isLoading) {
+            newFooterParagraph.style.whiteSpace = 'nowrap';
+            newFooterParagraph.style.display = 'flex';
+            newFooterParagraph.style.alignItems = 'center';
             newFooterParagraph.innerHTML = `
-                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle;">
                     <style>
                         .spinner {
                             transform-origin: center;
@@ -230,6 +233,8 @@ async function writeTextToSuggestionField(response, isLoading = false) {
                     <circle class="spinner" cx="12" cy="12" r="10" stroke="#54656F" stroke-width="3" fill="none" stroke-dasharray="15, 85" stroke-dashoffset="0"/>
                 </svg>`;
         } else {
+            newFooterParagraph.style.whiteSpace = 'normal';
+            newFooterParagraph.style.display = 'block';
             newFooterParagraph.innerHTML = response;
         }
     } catch (e) {
