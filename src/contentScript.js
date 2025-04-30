@@ -70,15 +70,16 @@ let globalMainNode;
 let newFooterParagraph;
 
 function createPrompt(lastIsMine, chatHistoryShort) {
-    let promptPrefix;
-    let promptInstructions = 'Me: ';
+    let promptCenter;
+    let tone_of_voice = 'Use Emoji and my own writing style.';
+    let mePrefix = 'Me: ';
     let promptPrefix1 = "You are an excellent chat-turn completer for Whatsapp. Your own turns in the provided chat-history are prefixed by 'Me: ', the turns of others by '<integer>: '. In a one-on-one coversation the other's turn is prefixed by '1: '.";
     if (lastIsMine) {
-        promptPrefix = promptPrefix1 + 'As “Me”, you always continue when the last turn was by Me. When the last turn was by someone else, you respond to it. Complete the following chat by providing a second message for my double-texting sequence, continuing in my own style. If the last message was by Me, do not react but continue the thought, elaborate, or add a supplementary point, without repeating the last utterance.:\n\n';
+        promptCenter = 'As “Me”, you always continue when the last turn was by Me. When the last turn was by someone else, you respond to it. Complete the following chat by providing a second message for my double-texting sequence, continuing in my own style. If the last message was by Me, do not react but continue the thought, elaborate, or add a supplementary point, without repeating the last utterance.';
     } else {
-        promptPrefix = promptPrefix1 + 'As "Me", give an utterance completing the following chat conversation flow. Use Emoji and my writing style:\n\n';
+        promptCenter = 'As "Me", give an utterance completing the following chat conversation flow.';
     }
-    let prompt = promptPrefix + chatHistoryShort + "\n\n" + promptInstructions;
+    let prompt = promptPrefix1 + ' ' + promptCenter + ' ' + tone_of_voice + '\n\n' + "chat history:\n" + chatHistoryShort + "\n\n" + mePrefix;
     console.log("prompt:", prompt)
     return prompt;
 }
