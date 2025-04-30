@@ -75,7 +75,7 @@ function createPrompt(lastIsMine, chatHistoryShort) {
     let mePrefix = 'Me: ';
     let promptPrefix1 = "You are an excellent chat-turn completer for Whatsapp. Your own turns in the provided chat-history are prefixed by 'Me: ', the turns of others by '<integer>: '. In a one-on-one coversation the other's turn is prefixed by '1: '.";
     if (lastIsMine) {
-        promptCenter = 'As “Me”, you always continue when the last turn was by Me. When the last turn was by someone else, you respond to it. Complete the following chat by providing a second message for my double-texting sequence, continuing in my own style. If the last message was by Me, do not react but continue the thought, elaborate, or add a supplementary point, without repeating the last utterance.';
+        promptCenter = 'Complete the following chat by providing a second message for my double-texting sequence. Do not react but continue the thought, elaborate, or add a supplementary point, without repeating the last utterance.';
     } else {
         promptCenter = 'As "Me", give an utterance completing the following chat conversation flow.';
     }
