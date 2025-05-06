@@ -113,6 +113,11 @@ function createGptFooter(footer, mainNode) {
   const buttonContainer = createButtonContainer();
   const buttonContainer2 = createButtonContainer();
 
+  let mainFooterContainer = inputContainer.parentNode;
+  mainFooterContainer.insertBefore(buttonContainer, inputContainer);
+  mainFooterContainer.removeChild(mainFooterContainer.firstChild);
+  mainFooterContainer.removeChild(mainFooterContainer.lastChild);
+  mainFooterContainer.append(buttonContainer2);
   // Add GPT button to container
   buttonContainer.appendChild(gptButtonObject.gptButton);
 
@@ -123,20 +128,8 @@ function createGptFooter(footer, mainNode) {
   createAndAddOptionsButton(buttonContainer2);
 
   // Insert our button container before the input area
-  inputContainer.parentNode.insertBefore(buttonContainer, inputContainer);
-  inputContainer.parentNode.append(buttonContainer2);
 
   // Remove unnecessary elements
-  const elementsToRemove = [
-    // Remove plus button
-    newFooter.querySelector('button[title="Bijvoegen"]')?.closest('div'),
-    // Remove emoji button
-    newFooter.querySelector('button[aria-label="Uitdrukkingen kiezen"]')?.closest('div'),
-    // Remove voice message button
-    newFooter.querySelector('button[aria-label="Spraakbericht"]')?.closest('div')
-  ];
-
-  elementsToRemove.forEach(el => el?.remove());
 
   // Remove hint text
   const hintText = newFooter.querySelector('.x10l6tqk.x13vifvy.x1ey2m1c');
