@@ -91,53 +91,73 @@ function creatCopyButton(newFooter, newButtonContainer) {
 }
 
 function createGptFooter(footer, mainNode) {
+  // Clone the footer and get the main container
   const newFooter = footer.cloneNode(true);
+  const mainContainer = newFooter.querySelector('.copyable-area');
+  const inputContainer = mainContainer.querySelector('.lexical-rich-text-input');
 
-  // div containing 2 childdivs: the buttons-div (containing another div for each button) and the textfield-div (which also contains a div for the speechbutton)
-  let mainFooterContainerDiv = newFooter.childNodes[0].childNodes[0].childNodes[0].childNodes[0];
+  // Create GPT button
   const gptButtonObject = createGptButton();
 
-  // copies the button container with the smiley etc. and use that as the container for the new buttons at the end:
-  const buttonContainer = mainFooterContainerDiv.childNodes[0];
-  buttonContainer.removeChild(buttonContainer.firstChild)
-  // buttonContainer.removeChild(buttonContainer.firstChild)
-  const newButtonContainer = buttonContainer.cloneNode()
-  mainFooterContainerDiv.appendChild(newButtonContainer)
-  // mainFooterContainerDiv.removeChild(mainFooterContainerDiv.firstChild)
+  // Create button container for our custom buttons
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'custom-button-container';
+  buttonContainer.style.display = 'flex';
+  buttonContainer.style.alignItems = 'center';
+  buttonContainer.style.gap = '8px';
+  buttonContainer.style.padding = '0 8px';
+
+  // Add GPT button to container
   buttonContainer.appendChild(gptButtonObject.gptButton);
-  mainFooterContainerDiv.querySelectorAll('div').forEach(function (div) {
-    // removing the div with the hint from the field, it is the only one with no children, but with text:
-    if (div.children.length === 0 && div.textContent.trim().length !== 0) {
-      div.remove()
+
+  // Create and add copy button
+  const copyButton = creatCopyButton(newFooter, buttonContainer);
+
+  // Create and add options button
+  createAndAddOptionsButton(buttonContainer);
+
+  // Insert our button container before the input area
+  inputContainer.parentNode.insertBefore(buttonContainer, inputContainer);
+
+  // Remove unnecessary elements
+  const elementsToRemove = [
+    // Remove plus button
+    newFooter.querySelector('button[title="Bijvoegen"]')?.closest('div'),
+    // Remove emoji button
+    newFooter.querySelector('button[aria-label="Uitdrukkingen kiezen"]')?.closest('div'),
+    // Remove voice message button
+    newFooter.querySelector('button[aria-label="Spraakbericht"]')?.closest('div')
+  ];
+
+  elementsToRemove.forEach(el => el?.remove());
+
+  // Remove hint text
+  const hintText = newFooter.querySelector('.x10l6tqk.x13vifvy.x1ey2m1c');
+  if (hintText) {
+    hintText.remove();
+  }
+
+  // Insert the new footer after the original
+  footer.parentNode.insertBefore(newFooter, footer.nextSibling);
+
+  // Scroll to bottom after insertion
+  requestAnimationFrame(() => {
+    const chatContainer = mainNode.querySelector('[role="application"]');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   });
 
-
-  // select where type = button
-  const buttons = newFooter.querySelectorAll('button');
-  const speechbutton = buttons[2]
-  // const speechbutton = newFooter.querySelectorAll('.svlsagor[data-testid="ptt-ready-btn"]')[0];
-  const speechButtonParent = speechbutton.parentNode
-
-  speechButtonParent.remove()
-  const copyButton = creatCopyButton(newFooter, newButtonContainer);
-  createAndAddOptionsButton(newButtonContainer);
-
-
-  // Insert the new footer element after the original footer
-  let parentNode = footer.parentNode;
-  parentNode.insertBefore(newFooter, footer.nextSibling);
-
-  // scrolling to bottom, but after the insertion of the new footer has been processed:
-  setTimeout(() => {
-    const div2 = mainNode.querySelectorAll('[role="application"]');
-    div2[0].scrollTop = div2[0].scrollHeight;
-  }, 0);
-
-  // disable editing in the new footer
+  // Disable editing in the new footer
   const contentEditable = newFooter.querySelector('[contenteditable="true"]');
-  contentEditable.setAttribute('contenteditable', 'false');
+  if (contentEditable) {
+    contentEditable.setAttribute('contenteditable', 'false');
+  }
 
-  return {newFooter, gptButtonObject: gptButtonObject, copyButton};
+  return {
+    newFooter,
+    gptButtonObject,
+    copyButton
+  };
 }
 
