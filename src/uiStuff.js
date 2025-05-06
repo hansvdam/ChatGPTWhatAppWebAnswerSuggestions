@@ -99,25 +99,32 @@ function createGptFooter(footer, mainNode) {
   // Create GPT button
   const gptButtonObject = createGptButton();
 
-  // Create button container for our custom buttons
-  const buttonContainer = document.createElement('div');
-  buttonContainer.className = 'custom-button-container';
-  buttonContainer.style.display = 'flex';
-  buttonContainer.style.alignItems = 'center';
-  buttonContainer.style.gap = '8px';
-  buttonContainer.style.padding = '0 8px';
+  function createButtonContainer() {
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'custom-button-container';
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.alignItems = 'center';
+    buttonContainer.style.gap = '8px';
+    buttonContainer.style.padding = '0 8px';
+    return buttonContainer;
+  }
+
+// Create button container for our custom buttons
+  const buttonContainer = createButtonContainer();
+  const buttonContainer2 = createButtonContainer();
 
   // Add GPT button to container
   buttonContainer.appendChild(gptButtonObject.gptButton);
 
   // Create and add copy button
-  const copyButton = creatCopyButton(newFooter, buttonContainer);
+  const copyButton = creatCopyButton(newFooter, buttonContainer2);
 
   // Create and add options button
-  createAndAddOptionsButton(buttonContainer);
+  createAndAddOptionsButton(buttonContainer2);
 
   // Insert our button container before the input area
   inputContainer.parentNode.insertBefore(buttonContainer, inputContainer);
+  inputContainer.parentNode.append(buttonContainer2);
 
   // Remove unnecessary elements
   const elementsToRemove = [
