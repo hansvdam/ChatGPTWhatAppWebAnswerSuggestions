@@ -132,10 +132,11 @@ function createGptFooter(footer, mainNode) {
 
   // Remove unnecessary elements
 
-  // Remove hint text
-  const hintText = newFooter.querySelector('.x10l6tqk.x13vifvy.x1ey2m1c');
-  if (hintText) {
-    hintText.remove();
+  // Remove hint text using DOM traversal without class names
+  // Find the hint text element (sibling with aria-hidden="true")
+  const hintTextContainer = inputContainer.querySelector('div[aria-hidden="true"]');
+  if (hintTextContainer) {
+    hintTextContainer.remove();
   }
 
   // Insert the new footer after the original
