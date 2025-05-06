@@ -116,6 +116,7 @@ function createGptFooter(footer, mainNode) {
   let mainFooterContainer = inputContainer.parentNode;
   mainFooterContainer.insertBefore(buttonContainer, inputContainer);
   mainFooterContainer.removeChild(mainFooterContainer.firstChild);
+  mainFooterContainer.removeChild(mainFooterContainer.firstChild);
   mainFooterContainer.removeChild(mainFooterContainer.lastChild);
   mainFooterContainer.append(buttonContainer2);
   // Add GPT button to container
