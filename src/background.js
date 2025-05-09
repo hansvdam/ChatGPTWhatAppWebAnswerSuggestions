@@ -31,9 +31,13 @@ async function createGptUtterance(prompt) {
         });
 
         if (!chatResponse.ok) {
+            let supplementary = ""
+            if (chatResponse.status === 429) {
+                supplementary = " You have to add credits to your api account (see second link in options screen)"
+            }
             return {
                 error: {
-                    message: "Something went wrong fetching the answer from GPT; Status code: " + chatResponse.status + ", " + chatResponse.statusText
+                    message: "Something went wrong fetching the answer from GPT; Status code: " + chatResponse.status + ", " + chatResponse.statusText + supplementary
                 }
             };
         }
